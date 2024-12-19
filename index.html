@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .calculator h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+            color: #333;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="calculator">
+        <h1>Business Calculator</h1>
+        <div class="form-group">
+            <label for="cost">Cost Price (per unit):</label>
+            <input type="number" id="cost" v-model.number="costPrice" placeholder="Enter cost price">
+        </div>
+        <div class="form-group">
+            <label for="markup">Markup Percentage (%):</label>
+            <input type="number" id="markup" v-model.number="markupPercentage" placeholder="Enter markup %">
+        </div>
+        <div class="form-group">
+            <label for="units">Number of Units:</label>
+            <input type="number" id="units" v-model.number="units" placeholder="Enter units">
+        </div>
+        <button @click="calculate">Calculate</button>
+        <div class="result" v-if="totalSellingPrice">
+            <p>Unit Selling Price: {{ unitSellingPrice.toFixed(2) }}</p>
+            <p>Total Selling Price: {{ totalSellingPrice.toFixed(2) }}</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                costPrice: 0,
+                markupPercentage: 0,
+                units: 1,
+                unitSellingPrice: 0,
+                totalSellingPrice: 0
+            },
+            methods: {
+                calculate() {
+                    if (this.costPrice > 0 && this.units > 0) {
+                        this.unitSellingPrice = this.costPrice + (this.costPrice * this.markupPercentage / 100);
+                        this.totalSellingPrice = this.unitSellingPrice * this.units;
+                    } else {
+                        alert('Please enter valid values for cost price and units.');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
