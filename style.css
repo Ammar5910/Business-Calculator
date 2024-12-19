@@ -12,7 +12,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 20px;
+    padding: 10px;
     color: white;
     text-align: center;
   }
@@ -71,8 +71,8 @@
   
   .calc-box {
     overflow: hidden;
-    padding: 16px;
-    border-radius: 25px;
+    padding: 26px;
+    border-radius: 35px;
   
     display: grid;
     grid-template-rows: repeat(6, minmax(55px, auto));
